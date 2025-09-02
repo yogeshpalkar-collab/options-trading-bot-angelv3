@@ -105,17 +105,8 @@ def main():
     df = compute_indicators(df)
     bias, reasons, cpr_status = check_bias(df)
 
-    # Fetch NIFTY spot LTP (token 99926000 is for NIFTY index spot)
-    try:
-        ltp_data = api.ltpData("NSE", "NIFTY", "99926000")
-        spot_price = ltp_data["data"]["ltp"]
-        atm_strike = round(spot_price / 50) * 50
-    except Exception:
-        spot_price = 20000
-        atm_strike = 20000
-
     st.subheader(f"GO: {'CALL' if bias=='Bullish' else 'PUT' if bias=='Bearish' else 'NO GO'}")
-    st.caption(f"ATM Strike: {atm_strike} (Spot: {spot_price})")
+    st.caption(f"ATM Strike: 20000")  # In real bot, calculate from LTP
     st.subheader(f"Market Bias: {bias}")
     st.caption(f"Reasons: {reasons}")
     st.caption(f"CPR Status: {cpr_status}")

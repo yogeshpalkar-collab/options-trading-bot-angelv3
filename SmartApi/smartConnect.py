@@ -8,7 +8,7 @@ class SmartConnect:
         return {"status": "success", "client_id": client_id}
 
     def getInstruments(self, exchange):
-        # Simulated expiries
+        # Simulated: return all Tuesdays + monthly expiry for NIFTY
         return [
             {"name": "NIFTY", "expiry": "2025-09-02", "strike": 20000, "optiontype": "CE",
              "tradingsymbol": "NIFTY25SEP20000CE", "token": "12345", "lotsize": 75},
@@ -27,7 +27,6 @@ class SmartConnect:
         return [[now, 20000, 20050, 19950, 20010, 100000]]
 
     def ltpData(self, exchange, tradingsymbol, token):
-        # Simulated LTP: randomize near 20000 for testing
         return {"data": {"ltp": 20000 + random.randint(-20, 20)}}
 
     def placeOrder(self, **kwargs):

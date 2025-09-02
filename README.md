@@ -1,4 +1,4 @@
-# Options Trading Bot (Angel One) - Final (Dynamic ATM Strike)
+# Options Trading Bot (Angel One) - Final (Unpinned Pandas)
 
 ## Features
 - Bundled SmartApi (patched)
@@ -13,7 +13,6 @@
 - CPR Status shown in dashboard and logged in trade table
 - Trade Log Table with P&L in ₹
 - No Simulate Trade button
-- Dynamic ATM Strike calculation using Angel LTP (nearest 50)
 
 ## Deployment (Render)
 - Build Command:
