@@ -1,21 +1,20 @@
-# Options Trading Bot (Angel One) - Self-contained SmartApi Version
+# Options Trading Bot (Angel One) - Self-contained Final (CPR Text Version)
 
 ## Features
-- ✅ Bundles SmartApi inside the project with patched __init__.py
-- ✅ No dependency on PyPI smartapi-python
-- ✅ Clean import: from SmartApi.smartConnect import SmartConnect
-- ✅ Works on Render without import errors
-
-## Setup
-1. pip install -r requirements.txt
-2. streamlit run options_trading_bot_angel.py
+- Bundled SmartApi (patched)
+- Master password protection
+- Angel One login via env vars
+- Paper/Live toggle (default Paper)
+- Expiry dropdown (current month)
+- ATR(14)+10 Stop Loss, TSL, Target = 10 pts
+- Max 3 trades/day, no repeat strikes, no trades after 3PM
+- Bias Dashboard (EMA, VWAP, CPR, ATR)
+- CPR treated as advisory (trend reversal flag if mismatch)
+- CPR Status shown in dashboard and logged in trade table
+- Trade Log Table with P&L in ₹
 
 ## Deployment (Render)
 - Build Command:
-  ```bash
   pip install -r requirements.txt
-  ```
 - Start Command:
-  ```bash
   streamlit run options_trading_bot_angel.py --server.port 10000 --server.address 0.0.0.0
-  ```
