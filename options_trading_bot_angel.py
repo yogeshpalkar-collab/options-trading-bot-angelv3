@@ -22,7 +22,8 @@ def fetch_instruments(api):
 def get_month_expiries(instruments, symbol="NIFTY"):
     df = instruments[instruments["name"] == symbol].copy()
     df["expiry"] = pd.to_datetime(df["expiry"]).dt.date
-    return sorted(df["expiry"].unique())
+    today = datetime.date.today()
+    return sorted([e for e in df["expiry"].unique() if e >= today and e.month == today.month])
 
 def compute_indicators(df):
     df["EMA9"] = df["close"].ewm(span=9).mean()
@@ -86,25 +87,30 @@ def main():
     CLIENT_ID = os.getenv("CLIENT_ID")
     PASSWORD = os.getenv("PASSWORD")
     TOTP = os.getenv("TOTP")
+
     pw = st.text_input("Enter Master Password", type="password")
     if pw != MASTER_PASSWORD:
         st.warning("Enter correct master password to continue.")
         st.stop()
+
     mode = st.radio("Select Mode", ["Paper Trading", "Live Trading"], index=0)
     paper = (mode == "Paper Trading")
+
     api, _ = login_angel(API_KEY, CLIENT_ID, PASSWORD, TOTP)
     instruments = fetch_instruments(api)
     expiries = get_month_expiries(instruments)
     expiry_choice = st.selectbox("Select Expiry", expiries)
+
     df = pd.DataFrame([{"datetime": datetime.datetime.now(),"open":20000,"high":20050,"low":19950,"close":20010,"volume":100000}])
     df = compute_indicators(df)
     bias, reasons, cpr_status = check_bias(df)
+
+    st.subheader(f"GO: {'CALL' if bias=='Bullish' else 'PUT' if bias=='Bearish' else 'NO GO'}")
+    st.caption(f"ATM Strike: 20000")  # In real bot, calculate from LTP
     st.subheader(f"Market Bias: {bias}")
     st.caption(f"Reasons: {reasons}")
     st.caption(f"CPR Status: {cpr_status}")
-    if st.button("Simulate Trade"):
-        add_trade("GO CALL", bias, reasons, cpr_status, expiry_choice, 20000, 120, 110, 115, 130, "Target Hit")
-        st.success("✅ Simulated trade added.")
+
     if trade_log:
         st.subheader("Today's Trades")
         st.dataframe(pd.DataFrame(trade_log))

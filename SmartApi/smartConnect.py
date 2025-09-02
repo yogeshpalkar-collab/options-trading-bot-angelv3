@@ -8,11 +8,18 @@ class SmartConnect:
         return {"status": "success", "client_id": client_id}
 
     def getInstruments(self, exchange):
+        # Simulated: return all Tuesdays + monthly expiry for NIFTY
         return [
-            {"name": "NIFTY", "expiry": "2025-09-25", "strike": 20000, "optiontype": "CE",
+            {"name": "NIFTY", "expiry": "2025-09-02", "strike": 20000, "optiontype": "CE",
              "tradingsymbol": "NIFTY25SEP20000CE", "token": "12345", "lotsize": 75},
-            {"name": "NIFTY", "expiry": "2025-09-25", "strike": 20000, "optiontype": "PE",
-             "tradingsymbol": "NIFTY25SEP20000PE", "token": "12346", "lotsize": 75},
+            {"name": "NIFTY", "expiry": "2025-09-09", "strike": 20000, "optiontype": "CE",
+             "tradingsymbol": "NIFTY25SEP20000CE", "token": "12346", "lotsize": 75},
+            {"name": "NIFTY", "expiry": "2025-09-16", "strike": 20000, "optiontype": "CE",
+             "tradingsymbol": "NIFTY25SEP20000CE", "token": "12347", "lotsize": 75},
+            {"name": "NIFTY", "expiry": "2025-09-23", "strike": 20000, "optiontype": "CE",
+             "tradingsymbol": "NIFTY25SEP20000CE", "token": "12348", "lotsize": 75},
+            {"name": "NIFTY", "expiry": "2025-09-25", "strike": 20000, "optiontype": "CE",
+             "tradingsymbol": "NIFTY25SEP20000CE", "token": "12349", "lotsize": 75},
         ]
 
     def getCandleData(self, params):
