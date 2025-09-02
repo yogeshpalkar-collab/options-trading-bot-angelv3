@@ -1,4 +1,4 @@
-# Options Trading Bot (Angel One) - Self-contained Final (Pinned Versions)
+# Options Trading Bot (Angel One) - Final (Unpinned Pandas)
 
 ## Features
 - Bundled SmartApi (patched)
